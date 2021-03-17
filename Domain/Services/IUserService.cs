@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ProjetoDFS.Domain.Services
 {
-    public interface CompanyService
+    public interface IUserService
     {
-        Task<IEnumerable<Company>> ListAsync();
+        Task<IEnumerable<User>> ListAsync();
     }
 }

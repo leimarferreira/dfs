@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ProjetoDFS.Domain.Services
 {
-    public interface PurchaseService
+    public interface IProductService
     {
-        Task<IEnumerable<Purchase>> ListAsync();
+        Task<IEnumerable<Product>> ListAsync();
     }
 }
