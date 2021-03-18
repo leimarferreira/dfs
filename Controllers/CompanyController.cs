@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoDFS.Domain.Models;
 using ProjetoDFS.Domain.Services;
+using ProjetoDFS.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +16,21 @@ namespace ProjetoDFS.Controllers
     public class CompanyController : ControllerBase
     {
         private readonly ICompanyService _companyService;
+        private readonly IMapper _mapper;
 
-        public CompanyController(ICompanyService companyService)
+        public CompanyController(ICompanyService companyService, IMapper mapper)
         {
             _companyService = companyService;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Company>> GetAllAsync()
+        public async Task<IEnumerable<CompanyResource>> GetAllAsync()
         {
             var companies = await _companyService.ListAsync();
-            return companies;
+            var resources = _mapper.Map<IEnumerable<Company>, IEnumerable<CompanyResource>>(companies);
+
+            return resources;
         }
     }
 }

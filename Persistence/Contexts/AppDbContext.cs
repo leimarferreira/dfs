@@ -25,7 +25,8 @@ namespace ProjetoDFS.Persistence.Contexts
             builder.Entity<Company>().Property(p => p.TradeName).IsRequired().HasMaxLength(70);
             builder.Entity<Company>().Property(p => p.LegalName).IsRequired().HasMaxLength(70);
             builder.Entity<Company>().Property(p => p.Cnpj).IsRequired().HasMaxLength(14);
-            builder.Entity<Company>().HasMany(p => p.Products).WithOne(p => p.Company).HasForeignKey(p => p.Company.Id);
+            //TODO: try to remove the need of CompanyId field in Product
+            builder.Entity<Company>().HasMany(p => p.Products).WithOne(p => p.Company).HasForeignKey(p => p.CompanyId);
 
             builder.Entity<Product>().ToTable("Products");
             builder.Entity<Product>().HasKey(p => p.Id);
@@ -34,7 +35,8 @@ namespace ProjetoDFS.Persistence.Contexts
             builder.Entity<Product>().Property(p => p.Description).IsRequired().HasMaxLength(100);
             builder.Entity<Product>().Property(p => p.Value).IsRequired();
             builder.Entity<Product>().Property(p => p.Note).HasMaxLength(100);
-            builder.Entity<Product>().Property(p => p.Company).IsRequired();
+            // TODO: fix this
+            //builder.Entity<Product>().Property(p => p.Company).IsRequired();
 
             builder.Entity<Purchase>().ToTable("Purchases");
             builder.Entity<Purchase>().HasKey(p => p.Id);
@@ -46,8 +48,9 @@ namespace ProjetoDFS.Persistence.Contexts
             builder.Entity<Purchase>().Property(p => p.Note).HasMaxLength(100);
             builder.Entity<Purchase>().Property(p => p.PostalCode).IsRequired();
             builder.Entity<Purchase>().Property(p => p.Address).IsRequired();
-            builder.Entity<Purchase>().Property(p => p.Product).IsRequired();
-            builder.Entity<Purchase>().Property(p => p.Buyer).IsRequired();
+            // TODO: also fix this
+            //builder.Entity<Purchase>().Property(p => p.Product).IsRequired();
+            //builder.Entity<Purchase>().Property(p => p.Buyer).IsRequired();
 
             builder.Entity<User>().ToTable("Users");
             builder.Entity<User>().HasKey(p => p.Id);

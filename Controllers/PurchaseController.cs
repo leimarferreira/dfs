@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoDFS.Domain.Models;
 using ProjetoDFS.Domain.Services;
+using ProjetoDFS.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +16,21 @@ namespace ProjetoDFS.Controllers
     public class PurchaseController : ControllerBase
     {
         private readonly IPurchaseService _purchaseService;
+        private readonly IMapper _mapper;
 
-        public PurchaseController(IPurchaseService purchaseService)
+        public PurchaseController(IPurchaseService purchaseService, IMapper mapper)
         {
             _purchaseService = purchaseService;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Purchase>> GetAllAsync()
+        public async Task<IEnumerable<PurchaseResource>> GetAllAsync()
         {
             var purchases = await _purchaseService.ListAsync();
-            return purchases;
+            var resources = _mapper.Map<IEnumerable<Purchase>, IEnumerable<PurchaseResource>>(purchases);
+
+            return resources;
         }
     }
 }
