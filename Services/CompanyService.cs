@@ -25,18 +25,67 @@ namespace ProjetoDFS.Services
             return await _companyRepository.ListAsync();
         }
 
-        public async Task<SaveCompanyResponse> SaveAsync(Company company)
+        public async Task<CompanyResponse> SaveAsync(Company company)
         {
             try
             {
                 await _companyRepository.AddAsync(company);
                 await _unitOfWork.CompleteAsync();
 
-                return new SaveCompanyResponse(company);
+                return new CompanyResponse(company);
             }
             catch (Exception ex)
             {
-                return new SaveCompanyResponse($"An error has ocurred when saving the company: {ex.Message}");
+                return new CompanyResponse($"An error has ocurred when saving the company: {ex.Message}");
+            }
+        }
+
+        public async Task<CompanyResponse> UpdateAsync(int id, Company company)
+        {
+            var existingCompany = await _companyRepository.FindByIdAsync(id);
+
+            if (existingCompany == null)
+            {
+                return new CompanyResponse("Company not found.");
+            }
+
+            existingCompany.TradeName = company.TradeName;
+            existingCompany.LegalName = company.LegalName;
+            existingCompany.Cnpj = company.Cnpj;
+            existingCompany.Products = company.Products;
+
+            try
+            {
+                _companyRepository.Update(existingCompany);
+                await _unitOfWork.CompleteAsync();
+
+                return new CompanyResponse(existingCompany);
+            }
+            catch (Exception ex)
+            {
+                return new CompanyResponse($"An error has occurred when updating the company: {ex.Message}");
+            }
+        }
+
+        public async Task<CompanyResponse> DeleteAsync(int id)
+        {
+            var existingCompany = await _companyRepository.FindByIdAsync(id);
+
+            if (existingCompany == null)
+            {
+                return new CompanyResponse("Company not found.");
+            }
+
+            try
+            {
+                _companyRepository.Remove(existingCompany);
+                await _unitOfWork.CompleteAsync();
+
+                return new CompanyResponse(existingCompany);
+            }
+            catch (Exception ex)
+            {
+                return new CompanyResponse($"An error has occurred when deleting the company: {ex.Message}");
             }
         }
     }

@@ -25,18 +25,69 @@ namespace ProjetoDFS.Services
             return await _productRepository.ListAsync();
         }
 
-        public async Task<SaveProductResponse> SaveAsync(Product product)
+        public async Task<ProductResponse> SaveAsync(Product product)
         {
             try
             {
                 await _productRepository.AddAsync(product);
                 await _unitOfWork.CompleteAsync();
 
-                return new SaveProductResponse(product);
+                return new ProductResponse(product);
             }
             catch (Exception ex)
             {
-                return new SaveProductResponse($"An error has occurred when saving the product: {ex.Message}");
+                return new ProductResponse($"An error has occurred when saving the product: {ex.Message}");
+            }
+        }
+
+        public async Task<ProductResponse> UpdateAsync(int id, Product product)
+        {
+            var existingProduct = await _productRepository.FindByIdAsync(id);
+
+            if (existingProduct == null)
+            {
+                return new ProductResponse("Product not found.");
+            }
+
+            existingProduct.Name = product.Name;
+            existingProduct.Description = product.Description;
+            existingProduct.Value = product.Value;
+            existingProduct.Note = product.Note;
+            existingProduct.Company = product.Company;
+            existingProduct.CompanyId = product.CompanyId;
+
+            try
+            {
+                _productRepository.Update(product);
+                await _unitOfWork.CompleteAsync();
+
+                return new ProductResponse(existingProduct);
+            }
+            catch (Exception ex)
+            {
+                return new ProductResponse($"An error has occurred when updating the product: {ex.Message}");
+            }
+        }
+
+        public async Task<ProductResponse> DeleteAsync(int id)
+        {
+            var existingProduct = await _productRepository.FindByIdAsync(id);
+
+            if (existingProduct == null)
+            {
+                return new ProductResponse("Product not found.");
+            }
+
+            try
+            {
+                _productRepository.Remove(existingProduct);
+                await _unitOfWork.CompleteAsync();
+
+                return new ProductResponse(existingProduct);
+            }
+            catch (Exception ex)
+            {
+                return new ProductResponse($"An error has occurred when deleting the product: {ex.Message}");
             }
         }
     }

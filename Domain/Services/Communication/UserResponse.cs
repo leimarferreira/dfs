@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace ProjetoDFS.Domain.Services.Communication
 {
-    public class SaveUserResponse : BaseResponse
+    public class UserResponse : BaseResponse
     {
         public User User { get; set; }
 
-        private SaveUserResponse(bool success, string message, User user) : base(success, message)
+        private UserResponse(bool success, string message, User user) : base(success, message)
         {
             User = user;
         }
 
-        public SaveUserResponse(User user) : this(true, string.Empty, user)
+        public UserResponse(User user) : this(true, string.Empty, user)
         {
 
         }
 
-        public SaveUserResponse(string message) : this(false, message, null)
+        public UserResponse(string message) : this(false, message, null)
         {
 
         }

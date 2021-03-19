@@ -25,5 +25,20 @@ namespace ProjetoDFS.Persistence.Repositories
         {
             await _context.Users.AddAsync(user);
         }
+
+        public async Task<User> FindByIdAsync(int id)
+        {
+            return await _context.Users.FindAsync(id);
+        }
+
+        public void Update(User user)
+        {
+            _context.Users.Update(user);
+        }
+
+        public void Remove(User user)
+        {
+            _context.Users.Remove(user);
+        }
     }
 }

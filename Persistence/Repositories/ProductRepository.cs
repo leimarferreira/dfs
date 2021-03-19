@@ -25,5 +25,20 @@ namespace ProjetoDFS.Persistence.Repositories
         {
             await _context.Products.AddAsync(product);
         }
+
+        public async Task<Product> FindByIdAsync(int id)
+        {
+            return await _context.Products.FindAsync(id);
+        }
+
+        public void Update(Product product)
+        {
+            _context.Products.Update(product);
+        }
+
+        public void Remove(Product product)
+        {
+            _context.Products.Remove(product);
+        }
     }
 }

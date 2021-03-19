@@ -54,5 +54,40 @@ namespace ProjetoDFS.Controllers
 
             return Ok(companyResource);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutAsync(int id, [FromBody] SaveCompanyResource resource)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.GetErrorMessages());
+            }
+
+            var company = _mapper.Map<SaveCompanyResource, Company>(resource);
+            var result = await _companyService.UpdateAsync(id, company);
+
+            if (!result.Success)
+            {
+                return BadRequest(result.Message);
+            }
+
+            var companyResouce = _mapper.Map<Company, CompanyResource>(result.Company);
+
+            return Ok(companyResouce);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAsync(int id)
+        {
+            var result = await _companyService.DeleteAsync(id);
+
+            if (!result.Success)
+            {
+                return BadRequest(result.Message);
+            }
+
+            var companyResource = _mapper.Map<Company, CompanyResource>(result.Company);
+            return Ok(companyResource);
+        }
     }
 }

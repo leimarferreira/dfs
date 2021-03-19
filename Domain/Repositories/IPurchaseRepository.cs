@@ -10,5 +10,8 @@ namespace ProjetoDFS.Domain.Repositories
     {
         Task<IEnumerable<Purchase>> ListAsync();
         Task AddAsync(Purchase purchase);
+        Task<Purchase> FindByIdAsync(int id);
+        void Update(Purchase purchase);
+        void Remove(Purchase purchase);
     }
 }

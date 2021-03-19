@@ -54,5 +54,39 @@ namespace ProjetoDFS.Controllers
 
             return Ok(purchaseResource);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutAsync(int id, [FromBody] SavePurchaseResource resource)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.GetErrorMessages());
+            }
+
+            var purchase = _mapper.Map<SavePurchaseResource, Purchase>(resource);
+            var result = await _purchaseService.UpdateAsync(id, purchase);
+
+            if (!result.Success)
+            {
+                return BadRequest(result.Message);
+            }
+
+            var purchaseResource = _mapper.Map<Purchase, PurchaseResource>(result.Purchase);
+            return Ok(purchaseResource);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAsync(int id)
+        {
+            var result = await _purchaseService.DeleteAsync(id);
+
+            if (!result.Success)
+            {
+                return BadRequest(result.Message);
+            }
+
+            var purchaseResource = _mapper.Map<Purchase, PurchaseResource>(result.Purchase);
+            return Ok(purchaseResource);
+        }
     }
 }
