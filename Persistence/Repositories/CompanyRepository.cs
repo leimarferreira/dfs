@@ -20,5 +20,10 @@ namespace ProjetoDFS.Persistence.Repositories
         {
             return await _context.Companies.ToListAsync();
         }
+
+        public async Task AddAsync(Company company)
+        {
+            await _context.Companies.AddAsync(company);
+        }
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoDFS.Domain.Models;
 using ProjetoDFS.Domain.Services;
+using ProjetoDFS.Extensions;
 using ProjetoDFS.Resources;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,27 @@ namespace ProjetoDFS.Controllers
             var resources = _mapper.Map<IEnumerable<Purchase>, IEnumerable<PurchaseResource>>(purchases);
 
             return resources;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostAsync([FromBody] SavePurchaseResource resource)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.GetErrorMessages());
+            }
+
+            var purchase = _mapper.Map<SavePurchaseResource, Purchase>(resource);
+            var result = await _purchaseService.SaveAsync(purchase);
+
+            if (!result.Success)
+            {
+                return BadRequest(result.Message);
+            }
+
+            var purchaseResource = _mapper.Map<Purchase, PurchaseResource>(result.Purchase);
+
+            return Ok(purchaseResource);
         }
     }
 }

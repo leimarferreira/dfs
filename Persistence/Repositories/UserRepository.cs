@@ -20,5 +20,10 @@ namespace ProjetoDFS.Persistence.Repositories
         {
             return await _context.Users.ToListAsync();
         }
+
+        public async Task AddAsync(User user)
+        {
+            await _context.Users.AddAsync(user);
+        }
     }
 }

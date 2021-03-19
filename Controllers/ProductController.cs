@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoDFS.Domain.Models;
 using ProjetoDFS.Domain.Services;
+using ProjetoDFS.Extensions;
 using ProjetoDFS.Resources;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProjetoDFS.Controllers
@@ -31,6 +29,28 @@ namespace ProjetoDFS.Controllers
             var resources = _mapper.Map<IEnumerable<Product>, IEnumerable<ProductResource>>(products);
 
             return resources;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostAsync([FromBody] SaveProductResource resource)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.GetErrorMessages());
+            }
+
+            var product = _mapper.Map<SaveProductResource, Product>(resource);
+            var result = await _productService.SaveAsync(product);
+
+            if (!result.Success)
+            {
+                return BadRequest(result.Message);
+            }
+
+            var productResource = _mapper.Map<Product, ProductResource>(result.Product);
+
+            return Ok(productResource);
+
         }
     }
 }
