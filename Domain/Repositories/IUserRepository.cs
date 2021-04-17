@@ -13,5 +13,6 @@ namespace ProjetoDFS.Domain.Repositories
         Task<User> FindByIdAsync(int id);
         void Update(User user);
         void Remove(User user);
+        Task<User> FirstOrDefaultAsync(string login, string password);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoDFS.Domain.Models;
 using ProjetoDFS.Domain.Services;
@@ -11,6 +12,7 @@ namespace ProjetoDFS.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize()]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;

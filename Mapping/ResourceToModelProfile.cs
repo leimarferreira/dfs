@@ -12,6 +12,7 @@ namespace ProjetoDFS.Mapping
             CreateMap<SaveProductResource, Product>();
             CreateMap<SavePurchaseResource, Purchase>();
             CreateMap<SaveUserResource, User>();
+            CreateMap<AuthUserResource, User>();
         }
     }
 }

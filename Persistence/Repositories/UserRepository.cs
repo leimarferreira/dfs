@@ -40,5 +40,10 @@ namespace ProjetoDFS.Persistence.Repositories
         {
             _context.Users.Remove(user);
         }
+
+        public async Task<User> FirstOrDefaultAsync(string email, string password)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
+        }
     }
 }

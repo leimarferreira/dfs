@@ -88,5 +88,10 @@ namespace ProjetoDFS.Services
                 return new UserResponse($"An error has occurred when deleting the user: {ex.Message}");
             }
         }
+
+        public async Task<User> FirstOrDefaultAsync(string email, string password)
+        {
+            return await _userRepository.FirstOrDefaultAsync(email, password);
+        }
     }
 }

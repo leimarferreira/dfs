@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoDFS.Domain.Models;
@@ -14,6 +15,7 @@ namespace ProjetoDFS.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize()]
     public class PurchaseController : ControllerBase
     {
         private readonly IPurchaseService _purchaseService;
