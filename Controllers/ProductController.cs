@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoDFS.Domain.Models;
 using ProjetoDFS.Domain.Services;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace ProjetoDFS.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     [Authorize()]

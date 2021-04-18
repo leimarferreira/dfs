@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using ProjetoDFS.Domain.Models;
@@ -12,6 +13,7 @@ using ProjetoDFS.Utils;
 
 namespace ProjetoDFS.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Route("/api/[controller]")]
     [AllowAnonymous]
     public class AuthenticationController : ControllerBase
