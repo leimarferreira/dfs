@@ -58,7 +58,7 @@ namespace ProjetoDFS.Services
 
             try
             {
-                _productRepository.Update(product);
+                _productRepository.Update(existingProduct);
                 await _unitOfWork.CompleteAsync();
 
                 return new ProductResponse(existingProduct);
