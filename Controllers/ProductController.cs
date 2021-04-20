@@ -35,6 +35,15 @@ namespace ProjetoDFS.Controllers
             return resources;
         }
 
+        [HttpGet("{id}")]
+        public async Task<ProductResource> GetByIdAsync(int id)
+        {
+            var product = await _productService.FindByIdAsync(id);
+            var resource = _mapper.Map<Product, ProductResource>(product);
+
+            return resource;
+        }
+
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] SaveProductResource resource)
         {
