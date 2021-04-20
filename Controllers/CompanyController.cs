@@ -38,6 +38,15 @@ namespace ProjetoDFS.Controllers
             return resources;
         }
 
+        [HttpGet("{id}")]
+        public async Task<CompanyResource> GetByIdAsync(int id)
+        {
+            var company = await _companyService.FindByIdAsync(id);
+            var resource = _mapper.Map<Company, CompanyResource>(company);
+
+            return resource;
+        }
+
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] SaveCompanyResource resource)
         {

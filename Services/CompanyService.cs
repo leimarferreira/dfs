@@ -25,6 +25,11 @@ namespace ProjetoDFS.Services
             return await _companyRepository.ListAsync();
         }
 
+        public async Task<Company> FindByIdAsync(int id)
+        {
+            return await _companyRepository.FindByIdAsync(id);
+        }
+
         public async Task<CompanyResponse> SaveAsync(Company company)
         {
             try
