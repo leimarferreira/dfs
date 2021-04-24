@@ -38,6 +38,15 @@ namespace ProjetoDFS.Controllers
             return resources;
         }
 
+        [HttpGet("{id}")]
+        public async Task<User> GetByIdAsync(int id)
+        {
+            var user = await _userService.FindByIdAsync(id);
+            var resource = _mapper.Map<User, UserResource>(user);
+
+            return user;
+        }
+
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> PostAsync([FromBody] SaveUserResource resource)

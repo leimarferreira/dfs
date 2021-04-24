@@ -38,6 +38,15 @@ namespace ProjetoDFS.Controllers
             return resources;
         }
 
+        [HttpGet("{id}")]
+        public async Task<Purchase> GetByIdAsync(int id)
+        {
+            var purchase = await _purchaseService.FindByIdAsync(id);
+            var resource = _mapper.Map<Purchase, PurchaseResource>(purchase);
+
+            return purchase;
+        }
+
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] SavePurchaseResource resource)
         {
