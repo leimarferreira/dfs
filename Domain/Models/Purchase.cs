@@ -13,7 +13,9 @@ namespace ProjetoDFS.Domain.Models
         public string Note { get; set; }
         public string PostalCode { get; set; }
         public string Address { get; set; }
+        public int ProductId { get; set; }
         public Product Product { get; set; }
+        public int UserId { get; set; }
         public User Buyer { get; set; }
     }
 }
