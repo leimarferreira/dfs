@@ -25,6 +25,11 @@ namespace ProjetoDFS.Services
             return await _userRepository.ListAsync();
         }
 
+        public async Task<User> FindByIdAsync(int id)
+        {
+            return await _userRepository.FindByIdAsync(id);
+        }
+
         public async Task<UserResponse> SaveAsync(User user)
         {
             try

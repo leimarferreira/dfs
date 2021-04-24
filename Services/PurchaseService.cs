@@ -19,9 +19,14 @@ namespace ProjetoDFS.Services
             _purchaseRepository = purchaseRepository;
             _unitOfWork = unitOfWork;
         }
-        public Task<IEnumerable<Purchase>> ListAsync()
+        public async Task<IEnumerable<Purchase>> ListAsync()
         {
-            return _purchaseRepository.ListAsync();
+            return await _purchaseRepository.ListAsync();
+        }
+
+        public async Task<Purchase> FindByIdAsync(int id)
+        {
+            return await _purchaseRepository.FindByIdAsync(id);
         }
 
         public async Task<PurchaseResponse> SaveAsync(Purchase purchase)
