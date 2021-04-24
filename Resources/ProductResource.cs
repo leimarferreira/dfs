@@ -12,7 +12,6 @@ namespace ProjetoDFS.Resources
         public string Description { get; set; }
         public float Value { get; set; }
         public string Note { get; set; }
-        // TODO: try to replace CompanyId with Company
         public int CompanyId { get; set; }
     }
 }
