@@ -25,8 +25,6 @@ namespace ProjetoDFS.Persistence.Contexts
             builder.Entity<Company>().Property(p => p.TradeName).IsRequired().HasMaxLength(70);
             builder.Entity<Company>().Property(p => p.LegalName).IsRequired().HasMaxLength(70);
             builder.Entity<Company>().Property(p => p.Cnpj).IsRequired().HasMaxLength(14);
-            //TODO: try to remove the need of CompanyId field in Product
-            builder.Entity<Company>().HasMany(p => p.Products).WithOne(p => p.Company).HasForeignKey(p => p.CompanyId);
 
             builder.Entity<Product>().ToTable("Products");
             builder.Entity<Product>().HasKey(p => p.Id);
@@ -35,8 +33,8 @@ namespace ProjetoDFS.Persistence.Contexts
             builder.Entity<Product>().Property(p => p.Description).IsRequired().HasMaxLength(100);
             builder.Entity<Product>().Property(p => p.Value).IsRequired();
             builder.Entity<Product>().Property(p => p.Note).HasMaxLength(100);
-            // TODO: fix this
-            //builder.Entity<Product>().Property(p => p.Company).IsRequired();
+            builder.Entity<Product>().Property(p => p.CompanyId).IsRequired();
+            builder.Entity<Product>().HasOne(p => p.Company).WithMany(p => p.Products).HasForeignKey(p => p.CompanyId);
 
             builder.Entity<Purchase>().ToTable("Purchases");
             builder.Entity<Purchase>().HasKey(p => p.Id);
@@ -48,9 +46,9 @@ namespace ProjetoDFS.Persistence.Contexts
             builder.Entity<Purchase>().Property(p => p.Note).HasMaxLength(100);
             builder.Entity<Purchase>().Property(p => p.PostalCode).IsRequired();
             builder.Entity<Purchase>().Property(p => p.Address).IsRequired();
-            // TODO: also fix this
-            //builder.Entity<Purchase>().Property(p => p.Product).IsRequired();
-            //builder.Entity<Purchase>().Property(p => p.Buyer).IsRequired();
+            builder.Entity<Purchase>().Property(p => p.ProductId).IsRequired();
+            builder.Entity<Purchase>().Property(p => p.UserId).IsRequired();
+            builder.Entity<Purchase>().HasOne(p => p.Buyer).WithMany(p => p.Purchases).HasForeignKey(p => p.UserId);
 
             builder.Entity<User>().ToTable("Users");
             builder.Entity<User>().HasKey(p => p.Id);
