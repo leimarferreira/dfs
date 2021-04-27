@@ -30,6 +30,11 @@ namespace ProjetoDFS.Services
             return await _productRepository.FindByIdAsync(id);
         }
 
+        public async Task<IEnumerable<Product>> FindByCompanyIdAsync(int id)
+        {
+            return await _productRepository.FindByCompanyIdAsync(id);
+        }
+
         public async Task<ProductResponse> SaveAsync(Product product)
         {
             try
