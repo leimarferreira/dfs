@@ -29,6 +29,11 @@ namespace ProjetoDFS.Services
             return await _purchaseRepository.FindByIdAsync(id);
         }
 
+        public async Task<IEnumerable<Purchase>> FindByUserIdAsync(int id)
+        {
+            return await _purchaseRepository.FindByUserIdAsync(id);
+        }
+
         public async Task<PurchaseResponse> SaveAsync(Purchase purchase)
         {
             try
