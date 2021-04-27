@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjetoDFS.Domain.Models;
+using ProjetoDFS.Persistence.Configurations;
 
 namespace ProjetoDFS.Persistence.Contexts
 {
@@ -19,44 +20,10 @@ namespace ProjetoDFS.Persistence.Contexts
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<Company>().ToTable("Companies");
-            builder.Entity<Company>().HasKey(p => p.Id);
-            builder.Entity<Company>().Property(p => p.Id).ValueGeneratedOnAdd();
-            builder.Entity<Company>().Property(p => p.TradeName).IsRequired().HasMaxLength(70);
-            builder.Entity<Company>().Property(p => p.LegalName).IsRequired().HasMaxLength(70);
-            builder.Entity<Company>().Property(p => p.Cnpj).IsRequired().HasMaxLength(14);
-
-            builder.Entity<Product>().ToTable("Products");
-            builder.Entity<Product>().HasKey(p => p.Id);
-            builder.Entity<Product>().Property(p => p.Id).ValueGeneratedOnAdd();
-            builder.Entity<Product>().Property(p => p.Name).IsRequired().HasMaxLength(30);
-            builder.Entity<Product>().Property(p => p.Description).IsRequired().HasMaxLength(100);
-            builder.Entity<Product>().Property(p => p.Value).IsRequired();
-            builder.Entity<Product>().Property(p => p.Note).HasMaxLength(100);
-            builder.Entity<Product>().Property(p => p.CompanyId).IsRequired();
-            builder.Entity<Product>().HasOne(p => p.Company).WithMany(p => p.Products).HasForeignKey(p => p.CompanyId);
-
-            builder.Entity<Purchase>().ToTable("Purchases");
-            builder.Entity<Purchase>().HasKey(p => p.Id);
-            builder.Entity<Purchase>().Property(p => p.Id).ValueGeneratedOnAdd();
-            builder.Entity<Purchase>().Property(p => p.Value).IsRequired();
-            builder.Entity<Purchase>().Property(p => p.Date).IsRequired();
-            builder.Entity<Purchase>().Property(p => p.PaymentMethod).IsRequired();
-            builder.Entity<Purchase>().Property(p => p.Status).IsRequired();
-            builder.Entity<Purchase>().Property(p => p.Note).HasMaxLength(100);
-            builder.Entity<Purchase>().Property(p => p.PostalCode).IsRequired();
-            builder.Entity<Purchase>().Property(p => p.Address).IsRequired();
-            builder.Entity<Purchase>().Property(p => p.ProductId).IsRequired();
-            builder.Entity<Purchase>().Property(p => p.UserId).IsRequired();
-            builder.Entity<Purchase>().HasOne(p => p.Buyer).WithMany(p => p.Purchases).HasForeignKey(p => p.UserId);
-
-            builder.Entity<User>().ToTable("Users");
-            builder.Entity<User>().HasKey(p => p.Id);
-            builder.Entity<User>().Property(p => p.Id).ValueGeneratedOnAdd();
-            builder.Entity<User>().Property(p => p.Name).IsRequired();
-            builder.Entity<User>().Property(p => p.Email).IsRequired();
-            builder.Entity<User>().Property(p => p.Password).IsRequired();
-            builder.Entity<User>().Property(p => p.Cpf).IsRequired();
+            builder.ApplyConfiguration(new CompanyConfiguration());
+            builder.ApplyConfiguration(new ProductConfiguration());
+            builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new PurchaseConfiguration());
         }
     }
 }
