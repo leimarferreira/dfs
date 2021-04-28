@@ -12,6 +12,6 @@ namespace ProjetoDFS.Domain.Repositories
         Task AddAsync(Company company);
         Task<Company> FindByIdAsync(int id);
         void Update(Company company);
-        void Remove(Company company);
+        void Remove(int id);
     }
 }

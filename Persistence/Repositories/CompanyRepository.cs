@@ -36,8 +36,11 @@ namespace ProjetoDFS.Persistence.Repositories
             _context.Companies.Update(company);
         }
 
-        public void Remove(Company company)
+        public void Remove(int id)
         {
+            var company = _context.Companies
+                .Include(p => p.Products).FirstOrDefault(p => p.Id == id);
+                
             _context.Companies.Remove(company);
         }
     }
