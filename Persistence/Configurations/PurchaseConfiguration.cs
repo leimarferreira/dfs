@@ -18,9 +18,8 @@ namespace ProjetoDFS.Persistence.Configurations
             builder.Property(p => p.Note).HasMaxLength(100);
             builder.Property(p => p.PostalCode).IsRequired();
             builder.Property(p => p.Address).IsRequired();
-            builder.Property(p => p.ProductId).IsRequired();
-            builder.Property(p => p.UserId).IsRequired();
-            builder.HasOne(p => p.Buyer).WithMany(p => p.Purchases).HasForeignKey(p => p.UserId);
+            builder.HasOne(p => p.Product).WithMany().IsRequired();
+            builder.HasOne(p => p.Buyer).WithMany(p => p.Purchases).IsRequired();
         }
     }
 }
