@@ -72,10 +72,9 @@ namespace ProjetoDFS.Controllers
                 return BadRequest(result.Message);
             }
 
-            // TODO: fix this
-            //var purchaseResource = _mapper.Map<Purchase, PurchaseResource>(result.Purchase);
+            var purchaseResource = _mapper.Map<Purchase, PurchaseResource>(result.Purchase);
 
-            return Ok(result.Purchase);
+            return Ok(purchaseResource);
         }
 
         [HttpPut("{id}")]

@@ -14,7 +14,7 @@ namespace ProjetoDFS.Resources
         public string Note { get; set; }
         public string PostalCode { get; set; }
         public string Address { get; set; }
-        public Product ProductId { get; set; }
-        public User UserId { get; set; }
+        public int ProductId { get; set; }
+        public int UserId { get; set; }
     }
 }
