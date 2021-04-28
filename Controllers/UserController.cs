@@ -39,12 +39,12 @@ namespace ProjetoDFS.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<User> GetByIdAsync(int id)
+        public async Task<UserResource> GetByIdAsync(int id)
         {
             var user = await _userService.FindByIdAsync(id);
             var resource = _mapper.Map<User, UserResource>(user);
 
-            return user;
+            return resource;
         }
 
         [HttpPost]

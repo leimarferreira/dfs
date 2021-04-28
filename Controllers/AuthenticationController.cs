@@ -53,7 +53,7 @@ namespace ProjetoDFS.Controllers
                     result = new
                     {
                         token,
-                        user = new { user.Id, user.Email }
+                        user = new { result.Id, result.Email }
                     }
                 });
             }

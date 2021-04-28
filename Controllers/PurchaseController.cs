@@ -39,12 +39,12 @@ namespace ProjetoDFS.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<Purchase> GetByIdAsync(int id)
+        public async Task<PurchaseResource> GetByIdAsync(int id)
         {
             var purchase = await _purchaseService.FindByIdAsync(id);
             var resource = _mapper.Map<Purchase, PurchaseResource>(purchase);
 
-            return purchase;
+            return resource;
         }
 
         [HttpGet("byuser/{id}")]
@@ -72,9 +72,10 @@ namespace ProjetoDFS.Controllers
                 return BadRequest(result.Message);
             }
 
-            var purchaseResource = _mapper.Map<Purchase, PurchaseResource>(result.Purchase);
+            // TODO: fix this
+            //var purchaseResource = _mapper.Map<Purchase, PurchaseResource>(result.Purchase);
 
-            return Ok(purchaseResource);
+            return Ok(result.Purchase);
         }
 
         [HttpPut("{id}")]
