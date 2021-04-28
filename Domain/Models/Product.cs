@@ -6,7 +6,6 @@ namespace ProjetoDFS.Domain.Models
         public string Description { get; set; }
         public float Value { get; set; }
         public string Note { get; set; }
-        public int CompanyId { get; set; }
         public Company Company { get; set; }
     }
 }

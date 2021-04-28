@@ -13,7 +13,8 @@ namespace ProjetoDFS.Mapping
         public ModelToResourceProfile()
         {
             CreateMap<Company, CompanyResource>();
-            CreateMap<Product, ProductResource>();
+            CreateMap<Product, ProductResource>()
+                .ForMember(dest => dest.CompanyId, opt => opt.MapFrom(src => src.Company.Id));
             CreateMap<Purchase, PurchaseResource>();
             CreateMap<User, UserResource>();
         }
