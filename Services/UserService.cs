@@ -61,7 +61,7 @@ namespace ProjetoDFS.Services
 
             try
             {
-                _userRepository.Update(user);
+                _userRepository.Update(existingUser);
                 await _unitOfWork.CompleteAsync();
 
                 return new UserResponse(existingUser);
