@@ -41,6 +41,8 @@ namespace ProjetoDFS.Persistence.Repositories
 
         public void Update(Product product)
         {
+            var company = _context.Companies.Find(product.Company.Id);
+            product.Company = company;
             _context.Products.Update(product);
         }
 
