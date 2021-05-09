@@ -83,7 +83,7 @@ namespace ProjetoDFS.Services
 
             try
             {
-                _companyRepository.Remove(existingCompany.Id);
+                _companyRepository.Remove(existingCompany);
                 await _unitOfWork.CompleteAsync();
 
                 return new CompanyResponse(existingCompany);
