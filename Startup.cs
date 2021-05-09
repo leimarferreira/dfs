@@ -46,7 +46,7 @@ namespace ProjetoDFS
 
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseInMemoryDatabase("database-name");
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
             });
 
             services.AddScoped<ICompanyRepository, CompanyRepository>();
