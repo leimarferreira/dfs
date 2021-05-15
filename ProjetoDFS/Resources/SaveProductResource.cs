@@ -20,5 +20,6 @@ namespace ProjetoDFS.Resources
         public string Note { get; set; }
         [Required]
         public int CompanyId { get; set; }
+        public string ImageDataURL { get; set; }
     }
 }

@@ -12,6 +12,7 @@ namespace ProjetoDFS.Resources
         public string Description { get; set; }
         public float Value { get; set; }
         public string Note { get; set; }
+        public string ImageDataURL { get; set; }
         public CompanyResource Company { get; set; }
     }
 }

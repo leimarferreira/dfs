@@ -13,5 +13,6 @@ namespace ProjetoDFS.Resources
         [Required]
         [MaxLength(14)]
         public string Cnpj { get; set; }
+        public string ImageDataURL { get; set; }
     }
 }

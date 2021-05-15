@@ -15,6 +15,7 @@ namespace ProjetoDFS.Persistence.Configurations
             builder.Property(p => p.Description).IsRequired().HasMaxLength(100);
             builder.Property(p => p.Value).IsRequired();
             builder.Property(p => p.Note).HasMaxLength(100);
+            builder.Property(p => p.ImageDataURL);
             builder.HasOne(p => p.Company)
                 .WithMany(p => p.Products).IsRequired().OnDelete(DeleteBehavior.Cascade);
         }

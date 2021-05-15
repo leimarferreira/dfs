@@ -14,6 +14,7 @@ namespace ProjetoDFS.Persistence.Configurations
             builder.Property(p => p.TradeName).IsRequired().HasMaxLength(70);
             builder.Property(p => p.LegalName).IsRequired().HasMaxLength(70);
             builder.Property(p => p.Cnpj).IsRequired().HasMaxLength(14);
+            builder.Property(p => p.ImageDataURL);
         }
     }
 }
