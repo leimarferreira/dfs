@@ -19,9 +19,9 @@ namespace ProjetoDFS.Persistence.Configurations
             builder.Property(p => p.PostalCode).IsRequired();
             builder.Property(p => p.Address).IsRequired();
             builder.HasOne(p => p.Product)
-                .WithMany().IsRequired().OnDelete(DeleteBehavior.SetNull);
+                .WithMany().OnDelete(DeleteBehavior.SetNull);
             builder.HasOne(p => p.Buyer)
-                .WithMany(p => p.Purchases).IsRequired().OnDelete(DeleteBehavior.SetNull);
+                .WithMany(p => p.Purchases).OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

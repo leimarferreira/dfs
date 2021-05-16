@@ -58,6 +58,7 @@ namespace ProjetoDFS.Services
             existingCompany.LegalName = company.LegalName;
             existingCompany.Cnpj = company.Cnpj;
             existingCompany.Products = company.Products;
+            existingCompany.ImageDataURL = company.ImageDataURL;
 
             try
             {

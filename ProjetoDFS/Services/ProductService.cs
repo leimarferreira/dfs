@@ -64,6 +64,7 @@ namespace ProjetoDFS.Services
             existingProduct.Value = product.Value;
             existingProduct.Note = product.Note;
             existingProduct.Company = product.Company;
+            existingProduct.ImageDataURL = product.ImageDataURL;
 
             try
             {
