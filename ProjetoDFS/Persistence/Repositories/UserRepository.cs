@@ -31,6 +31,16 @@ namespace ProjetoDFS.Persistence.Repositories
             return await _context.Users.FindAsync(id);
         }
 
+        public async Task<User> FindByEmailAsync(string email)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        }
+
+        public async Task<User> FindByCpfAsync(string cpf)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Cpf == cpf);
+        }
+
         public void Update(User user)
         {
             _context.Users.Update(user);

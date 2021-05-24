@@ -39,10 +39,10 @@ namespace ProjetoDFS.Controllers
                 }
 
                 var user = _mapper.Map<AuthUserResource, User>(resource);
-                var result = await _userService.FirstOrDefaultAsync(user.Email, user.Password);
+                var response = await _userService.FindByCredentials(user.Email, user.Password);
 
-                if (result == null) {
-                    return BadRequest("Error during login.");
+                if (!response.Success) {
+                    return BadRequest(response.Message);
                 }
 
                 var token = CryptoFunctions.GenerateToken(_configuration, user);
@@ -53,7 +53,7 @@ namespace ProjetoDFS.Controllers
                     result = new
                     {
                         token,
-                        user = new { result.Id, result.Email }
+                        user = new { response.User.Id, response.User.Email }
                     }
                 });
             }

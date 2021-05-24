@@ -2,6 +2,7 @@
 using ProjetoDFS.Domain.Repositories;
 using ProjetoDFS.Domain.Services;
 using ProjetoDFS.Domain.Services.Communication;
+using ProjetoDFS.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,8 +31,46 @@ namespace ProjetoDFS.Services
             return await _userRepository.FindByIdAsync(id);
         }
 
+        public async Task<UserResponse> FindByCredentials(string email, string password)
+        {
+            var user = await _userRepository.FindByEmailAsync(email);
+
+            if (user == null) {
+                return new UserResponse("Invalid email.");
+            }
+
+            if (user.Password != password) {
+                return new UserResponse("Invalid password.");
+            }
+
+            return new UserResponse(user);
+        }
+
         public async Task<UserResponse> SaveAsync(User user)
         {
+            var existingUser = await _userRepository.FindByEmailAsync(user.Email);
+
+            if (existingUser != null)
+            {
+                return new UserResponse("Email already in use.");
+            }
+
+            existingUser = await _userRepository.FindByCpfAsync(user.Cpf);
+
+            if (existingUser != null) {
+                return new UserResponse("CPF already in use.");
+            }
+
+            if (!ValidationFunctions.IsValidEmail(user.Email))
+            {
+                return new UserResponse("Invalid email.");
+            }
+
+            if (!ValidationFunctions.IsValidCpf(user.Cpf))
+            {
+                return new UserResponse("Invalid CPF.");
+            }
+
             try
             {
                 await _userRepository.AddAsync(user);
@@ -52,6 +91,30 @@ namespace ProjetoDFS.Services
             if (existingUser == null)
             {
                 return new UserResponse("User not found.");
+            }
+
+            var existingCpfUser = await _userRepository.FindByCpfAsync(user.Cpf);
+
+            if (existingCpfUser != null && existingUser.Id != existingCpfUser.Id)
+            {
+                return new UserResponse("CPF already in use by another user.");
+            }
+
+            var existingEmailUser = await _userRepository.FindByEmailAsync(user.Email);
+
+            if (existingEmailUser != null && existingUser.Id != existingEmailUser.Id)
+            {
+                return new UserResponse("Email already in use by another user.");
+            }
+
+            if (user.Email != existingUser.Email && !ValidationFunctions.IsValidEmail(user.Email))
+            {
+                return new UserResponse("Invalid email.");
+            }
+
+            if (user.Cpf != existingUser.Cpf && !ValidationFunctions.IsValidCpf(user.Cpf))
+            {
+                return new UserResponse("Invalid CPF.");
             }
 
             existingUser.Name = user.Name;
@@ -92,11 +155,6 @@ namespace ProjetoDFS.Services
             {
                 return new UserResponse($"An error has occurred when deleting the user: {ex.Message}");
             }
-        }
-
-        public async Task<User> FirstOrDefaultAsync(string email, string password)
-        {
-            return await _userRepository.FirstOrDefaultAsync(email, password);
         }
     }
 }

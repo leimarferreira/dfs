@@ -21,14 +21,19 @@ namespace ProjetoDFS.Persistence.Repositories
             return await _context.Companies.ToListAsync();
         }
 
-        public async Task AddAsync(Company company)
-        {
-            await _context.Companies.AddAsync(company);
-        }
-
         public async Task<Company> FindByIdAsync(int id)
         {
             return await _context.Companies.FindAsync(id);
+        }
+
+        public async Task<Company> FindByCnpjAsync(string cnpj)
+        {
+            return await _context.Companies.FirstOrDefaultAsync(c => c.Cnpj == cnpj);
+        }
+
+        public async Task AddAsync(Company company)
+        {
+            await _context.Companies.AddAsync(company);
         }
 
         public void Update(Company company)

@@ -2,6 +2,7 @@
 using ProjetoDFS.Domain.Repositories;
 using ProjetoDFS.Domain.Services;
 using ProjetoDFS.Domain.Services.Communication;
+using ProjetoDFS.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,18 @@ namespace ProjetoDFS.Services
 
         public async Task<CompanyResponse> SaveAsync(Company company)
         {
+            var existingCompany = await _companyRepository.FindByCnpjAsync(company.Cnpj);
+
+            if (existingCompany != null)
+            {
+                return new CompanyResponse("CNPJ already in use.");
+            }
+
+            if (ValidationFunctions.IsValidCnpj(company.Cnpj))
+            {
+                return new CompanyResponse("Invalid CNPJ.");
+            }
+
             try
             {
                 await _companyRepository.AddAsync(company);
@@ -52,6 +65,17 @@ namespace ProjetoDFS.Services
             if (existingCompany == null)
             {
                 return new CompanyResponse("Company not found.");
+            }
+
+            var existingCnpjCompany = await _companyRepository.FindByCnpjAsync(company.Cnpj);
+
+            if (existingCnpjCompany != null && existingCnpjCompany.Id != existingCompany.Id){
+                return new CompanyResponse("CNPJ already in use by another company.");
+            }
+
+            if (company.Cnpj != existingCnpjCompany.Cnpj && !ValidationFunctions.IsValidCnpj(company.Cnpj))
+            {
+                return new CompanyResponse("Invalid CNPJ.");
             }
 
             existingCompany.TradeName = company.TradeName;

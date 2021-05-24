@@ -23,7 +23,7 @@ namespace ProjetoDFS.Persistence.Repositories
 
         public async Task<Product> FindByIdAsync(int id)
         {
-            return await _context.Products.Include(p => p.Company).FirstAsync(p => p.Id == id);
+            return await _context.Products.Include(p => p.Company).FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<IEnumerable<Product>> FindByCompanyIdAsync(int id)
