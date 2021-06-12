@@ -175,9 +175,33 @@ namespace ProjetoDFS.Tests.Services
         }
 
         [TestMethod]
-        public void DeleteCompany_ShouldDeleteAllCompanyProducts()
+        public async Task DeleteCompany_ShouldDeleteAllCompanyProducts()
         {
-            Assert.IsFalse(true);
+            var company = new CompanyBuilder().DefaultCompany().Build();
+            int id = (await _companyService.SaveAsync(company)).Company.Id;
+
+            var productRepository = new ProductRepository(_dbContext);
+            await productRepository.AddAsync(
+                new ProductBuilder()
+                .DefaultProduct()
+                .WithCompany(company)
+                .Build());
+            await productRepository.AddAsync(
+                new ProductBuilder()
+                .DefaultProduct()
+                .WithCompany(company)
+                .Build());
+            await productRepository.AddAsync(
+                new ProductBuilder()
+                .DefaultProduct()
+                .WithCompany(company)
+                .Build());
+            _dbContext.SaveChanges();
+            Assert.AreNotEqual(0, (await _dbContext.Products.ToArrayAsync()).Length);
+            
+            var response = await _companyService.DeleteAsync(id);
+            Assert.IsTrue(response.Success);
+            Assert.AreEqual(0, (await _dbContext.Products.ToArrayAsync()).Length);
         }
     }
 }
