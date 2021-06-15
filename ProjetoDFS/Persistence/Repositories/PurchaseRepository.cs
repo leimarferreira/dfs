@@ -2,6 +2,7 @@
 using ProjetoDFS.Domain.Models;
 using ProjetoDFS.Domain.Repositories;
 using ProjetoDFS.Persistence.Contexts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,10 +26,17 @@ namespace ProjetoDFS.Persistence.Repositories
 
         public async Task<Purchase> FindByIdAsync(int id)
         {
-            return await _context.Purchases
-                .Include(p => p.Buyer)
-                .Include(p => p.Product)
-                .FirstAsync(p => p.Id == id);
+            try
+            {
+                return await _context.Purchases
+                    .Include(p => p.Buyer)
+                    .Include(p => p.Product)
+                    .FirstAsync(p => p.Id == id);
+            }
+            catch (Exception)
+            {
+                return await _context.Purchases.FindAsync(id);
+            }
         }
 
         public async Task<IEnumerable<Purchase>> FindByUserIdAsync(int id)

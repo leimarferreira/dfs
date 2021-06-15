@@ -48,31 +48,31 @@ namespace ProjetoDFS.Services
 
         public async Task<UserResponse> SaveAsync(User user)
         {
-            var existingUser = await _userRepository.FindByEmailAsync(user.Email);
-
-            if (existingUser != null)
-            {
-                return new UserResponse("Email already in use.");
-            }
-
-            existingUser = await _userRepository.FindByCpfAsync(user.Cpf);
-
-            if (existingUser != null) {
-                return new UserResponse("CPF already in use.");
-            }
-
-            if (!ValidationFunctions.IsValidEmail(user.Email))
-            {
-                return new UserResponse("Invalid email.");
-            }
-
-            if (!ValidationFunctions.IsValidCpf(user.Cpf))
-            {
-                return new UserResponse("Invalid CPF.");
-            }
-
             try
             {
+                var existingUser = await _userRepository.FindByEmailAsync(user.Email);
+
+                if (existingUser != null)
+                {
+                    return new UserResponse("Email already in use.");
+                }
+
+                existingUser = await _userRepository.FindByCpfAsync(user.Cpf);
+
+                if (existingUser != null) {
+                    return new UserResponse("CPF already in use.");
+                }
+
+                if (!ValidationFunctions.IsValidEmail(user.Email))
+                {
+                    return new UserResponse("Invalid email.");
+                }
+
+                if (!ValidationFunctions.IsValidCpf(user.Cpf))
+                {
+                    return new UserResponse("Invalid CPF.");
+                }
+
                 await _userRepository.AddAsync(user);
                 await _unitOfWork.CompleteAsync();
 

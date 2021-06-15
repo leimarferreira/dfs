@@ -40,7 +40,7 @@ namespace ProjetoDFS.Services
                 return new CompanyResponse("CNPJ already in use.");
             }
 
-            if (ValidationFunctions.IsValidCnpj(company.Cnpj))
+            if (!ValidationFunctions.IsValidCnpj(company.Cnpj))
             {
                 return new CompanyResponse("Invalid CNPJ.");
             }
@@ -73,7 +73,7 @@ namespace ProjetoDFS.Services
                 return new CompanyResponse("CNPJ already in use by another company.");
             }
 
-            if (company.Cnpj != existingCnpjCompany.Cnpj && !ValidationFunctions.IsValidCnpj(company.Cnpj))
+            if (!ValidationFunctions.IsValidCnpj(company.Cnpj))
             {
                 return new CompanyResponse("Invalid CNPJ.");
             }

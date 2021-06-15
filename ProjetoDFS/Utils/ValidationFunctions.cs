@@ -8,13 +8,18 @@ namespace ProjetoDFS.Utils
     {
         public static bool IsValidCpf(string cpf)
         {
-            if (cpf.Length != 11)
+            if (cpf == null || cpf.Length != 11)
+            {
+                return false;
+            }
+
+            if (!cpf.All(ch => Char.IsDigit(ch)))
             {
                 return false;
             }
 
             // Verify if all digits are the same
-            if (cpf.All(ch => ch == cpf[0]))
+            if (cpf.All(ch => ch == cpf[0] || !Char.IsDigit(ch)))
             {
                 return false;
             }
@@ -65,7 +70,12 @@ namespace ProjetoDFS.Utils
 
         public static bool IsValidCnpj(string cnpj)
         {
-            if (cnpj.Length != 14)
+            if (cnpj == null || cnpj.Length != 14)
+            {
+                return false;
+            }
+
+            if (!cnpj.All(ch => Char.IsDigit(ch)))
             {
                 return false;
             }
@@ -121,10 +131,14 @@ namespace ProjetoDFS.Utils
 
         public static bool IsValidEmail(string email)
         {
-            Regex pattern = new Regex(
-                "(^[a-zA-Z0-9]+([.]{1}[a-zA-Z0-9]+)*)[@]{1}([a-zA-Z0-9]+[.])*[a-zA-Z]+");
+            if (email != null) {
+                Regex pattern = new Regex(
+                    "(^[a-zA-Z0-9]+([.]{1}[a-zA-Z0-9]+)*)[@]{1}([a-zA-Z0-9]+[.])*[a-zA-Z]+");
             
-            return(pattern.IsMatch(email));
+                return(pattern.IsMatch(email));
+            }
+
+            return false;
         }
     }
 }
