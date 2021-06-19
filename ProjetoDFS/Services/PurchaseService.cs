@@ -1,4 +1,5 @@
-﻿using ProjetoDFS.Domain.Models;
+﻿using ProjetoDFS.Domain.Helpers;
+using ProjetoDFS.Domain.Models;
 using ProjetoDFS.Domain.Repositories;
 using ProjetoDFS.Domain.Services;
 using ProjetoDFS.Domain.Services.Communication;
@@ -38,6 +39,7 @@ namespace ProjetoDFS.Services
         {
             try
             {
+                purchase.Status = PurchaseStatus.Complete;
                 await _purchaseRepository.AddAsync(purchase);
                 await _unitOfWork.CompleteAsync();
 
