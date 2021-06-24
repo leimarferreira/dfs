@@ -1,10 +1,5 @@
-﻿using ProjetoDFS.Domain.Helpers;
-using ProjetoDFS.Domain.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProjetoDFS.Resources
 {

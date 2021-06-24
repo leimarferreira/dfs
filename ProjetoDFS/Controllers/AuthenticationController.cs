@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
@@ -10,6 +8,8 @@ using ProjetoDFS.Domain.Services;
 using ProjetoDFS.Extensions;
 using ProjetoDFS.Resources;
 using ProjetoDFS.Utils;
+using System;
+using System.Threading.Tasks;
 
 namespace ProjetoDFS.Controllers
 {
@@ -34,14 +34,16 @@ namespace ProjetoDFS.Controllers
         {
             try
             {
-                if (!ModelState.IsValid) {
+                if (!ModelState.IsValid)
+                {
                     return BadRequest(ModelState.GetErrorMessages());
                 }
 
                 var user = _mapper.Map<AuthUserResource, User>(resource);
                 var response = await _userService.FindByCredentials(user.Email, user.Password);
 
-                if (!response.Success) {
+                if (!response.Success)
+                {
                     return BadRequest(response.Message);
                 }
 

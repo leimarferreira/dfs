@@ -1,5 +1,5 @@
-using System;
 using ProjetoDFS.Domain.Helpers;
+using System;
 
 namespace ProjetoDFS.Domain.Models
 {

@@ -5,7 +5,6 @@ using ProjetoDFS.Domain.Services.Communication;
 using ProjetoDFS.Utils;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProjetoDFS.Services
@@ -35,11 +34,13 @@ namespace ProjetoDFS.Services
         {
             var user = await _userRepository.FindByEmailAsync(email);
 
-            if (user == null) {
+            if (user == null)
+            {
                 return new UserResponse("Invalid email.");
             }
 
-            if (user.Password != password) {
+            if (user.Password != password)
+            {
                 return new UserResponse("Invalid password.");
             }
 
@@ -59,7 +60,8 @@ namespace ProjetoDFS.Services
 
                 existingUser = await _userRepository.FindByCpfAsync(user.Cpf);
 
-                if (existingUser != null) {
+                if (existingUser != null)
+                {
                     return new UserResponse("CPF already in use.");
                 }
 

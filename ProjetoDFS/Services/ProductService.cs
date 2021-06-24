@@ -4,7 +4,6 @@ using ProjetoDFS.Domain.Services;
 using ProjetoDFS.Domain.Services.Communication;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProjetoDFS.Services

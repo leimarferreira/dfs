@@ -42,7 +42,8 @@ namespace ProjetoDFS.Utils
                 firstDigit = 11 - mod;
             }
 
-            if (firstDigit != cpfDigitsArray[9]) {
+            if (firstDigit != cpfDigitsArray[9])
+            {
                 return false;
             }
 
@@ -61,7 +62,8 @@ namespace ProjetoDFS.Utils
                 secondDigit = 11 - mod;
             }
 
-            if (secondDigit != cpfDigitsArray[10]) {
+            if (secondDigit != cpfDigitsArray[10])
+            {
                 return false;
             }
 
@@ -131,11 +133,12 @@ namespace ProjetoDFS.Utils
 
         public static bool IsValidEmail(string email)
         {
-            if (email != null) {
+            if (email != null)
+            {
                 Regex pattern = new Regex(
                     "(^[a-zA-Z0-9]+([.]{1}[a-zA-Z0-9]+)*)[@]{1}([a-zA-Z0-9]+[.])*[a-zA-Z]+");
-            
-                return(pattern.IsMatch(email));
+
+                return (pattern.IsMatch(email));
             }
 
             return false;

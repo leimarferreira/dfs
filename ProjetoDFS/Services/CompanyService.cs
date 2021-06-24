@@ -5,7 +5,6 @@ using ProjetoDFS.Domain.Services.Communication;
 using ProjetoDFS.Utils;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProjetoDFS.Services
@@ -69,7 +68,8 @@ namespace ProjetoDFS.Services
 
             var existingCnpjCompany = await _companyRepository.FindByCnpjAsync(company.Cnpj);
 
-            if (existingCnpjCompany != null && existingCnpjCompany.Id != existingCompany.Id){
+            if (existingCnpjCompany != null && existingCnpjCompany.Id != existingCompany.Id)
+            {
                 return new CompanyResponse("CNPJ already in use by another company.");
             }
 

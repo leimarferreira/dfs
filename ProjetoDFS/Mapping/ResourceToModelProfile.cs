@@ -1,6 +1,6 @@
-﻿using ProjetoDFS.Domain.Models;
+﻿using AutoMapper;
+using ProjetoDFS.Domain.Models;
 using ProjetoDFS.Resources;
-using AutoMapper;
 
 namespace ProjetoDFS.Mapping
 {

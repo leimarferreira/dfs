@@ -1,9 +1,9 @@
-using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using ProjetoDFS.Domain.Models;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 
 namespace ProjetoDFS.Utils
 {

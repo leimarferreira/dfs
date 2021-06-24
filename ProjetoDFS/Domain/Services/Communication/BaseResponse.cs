@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ProjetoDFS.Domain.Services.Communication
+﻿namespace ProjetoDFS.Domain.Services.Communication
 {
     public abstract class BaseResponse
     {
