@@ -1,0 +1,3 @@
+[submodule "projeto-dfs-front"]
+	path = projeto-dfs-front
+	url = git@github.com:leimarferreira/projeto-dfs-front.git
