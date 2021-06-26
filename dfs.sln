@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.6.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "core", "ProjetoDFS\core.csproj", "{CC734CC5-4786-4ACC-A7FB-8585333A3137}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "core", "core\core.csproj", "{CC734CC5-4786-4ACC-A7FB-8585333A3137}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "core_test", "ProjetoDFS.Tests\core_test.csproj", "{D0101DD5-907C-47BC-A391-F8A152AAE191}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "core_test", "core_test\core_test.csproj", "{D0101DD5-907C-47BC-A391-F8A152AAE191}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
