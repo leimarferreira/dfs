@@ -1,11 +1,11 @@
-using System;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ProjetoDFS.Persistence.Contexts;
 using ProjetoDFS.Persistence.Repositories;
 using ProjetoDFS.Services;
 using ProjetoDFS.Tests.Helpers;
+using System;
+using System.Threading.Tasks;
 
 namespace ProjetoDFS.Tests.Services
 {

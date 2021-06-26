@@ -1,6 +1,6 @@
-using System;
 using ProjetoDFS.Domain.Helpers;
 using ProjetoDFS.Domain.Models;
+using System;
 
 namespace ProjetoDFS.Tests.Helpers
 {

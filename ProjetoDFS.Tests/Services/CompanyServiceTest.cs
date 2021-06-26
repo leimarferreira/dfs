@@ -1,11 +1,11 @@
-using System;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ProjetoDFS.Persistence.Contexts;
 using ProjetoDFS.Persistence.Repositories;
 using ProjetoDFS.Services;
 using ProjetoDFS.Tests.Helpers;
+using System;
+using System.Threading.Tasks;
 
 namespace ProjetoDFS.Tests.Services
 {
@@ -33,7 +33,8 @@ namespace ProjetoDFS.Tests.Services
                 _dbContext.Companies.RemoveRange(companies);
                 _dbContext.SaveChanges();
             }
-            catch (Exception) {
+            catch (Exception)
+            {
 
             }
         }
@@ -100,7 +101,7 @@ namespace ProjetoDFS.Tests.Services
         public async Task UpdateCompany_ShouldFailIfRequiredFieldsAreMissing()
         {
             var company = new CompanyBuilder().DefaultCompany().Build();
-            int id =  (await _companyService.SaveAsync(company)).Company.Id;
+            int id = (await _companyService.SaveAsync(company)).Company.Id;
 
             company = new CompanyBuilder().Build();
 
@@ -134,7 +135,7 @@ namespace ProjetoDFS.Tests.Services
                 .DefaultCompany()
                 .WithCnpj("13579933000127")
                 .Build();
-            
+
             await _companyService.SaveAsync(anotherCompany);
 
             company = new CompanyBuilder()
@@ -198,7 +199,7 @@ namespace ProjetoDFS.Tests.Services
                 .Build());
             _dbContext.SaveChanges();
             Assert.AreNotEqual(0, (await _dbContext.Products.ToArrayAsync()).Length);
-            
+
             var response = await _companyService.DeleteAsync(id);
             Assert.IsTrue(response.Success);
             Assert.AreEqual(0, (await _dbContext.Products.ToArrayAsync()).Length);

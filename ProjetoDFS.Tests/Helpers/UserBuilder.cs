@@ -55,7 +55,7 @@ namespace ProjetoDFS.Tests.Helpers
             _cpf = "73960145063";
             _email = "username@domain.com";
             _password = "teste1234";
-            
+
             return this;
         }
     }

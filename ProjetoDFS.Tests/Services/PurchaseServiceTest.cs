@@ -1,13 +1,12 @@
-using System;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ProjetoDFS.Domain.Helpers;
-using ProjetoDFS.Domain.Models;
 using ProjetoDFS.Persistence.Contexts;
 using ProjetoDFS.Persistence.Repositories;
 using ProjetoDFS.Services;
 using ProjetoDFS.Tests.Helpers;
+using System;
+using System.Threading.Tasks;
 
 namespace ProjetoDFS.Tests.Services
 {
@@ -29,14 +28,15 @@ namespace ProjetoDFS.Tests.Services
         [TestCleanup]
         public void CleanTests()
         {
-            try {
+            try
+            {
                 var purchases = _dbContext.Purchases.ToArrayAsync().Result;
                 _dbContext.Purchases.RemoveRange(purchases);
                 _dbContext.SaveChanges();
             }
             catch (Exception)
             {
-                
+
             }
         }
 

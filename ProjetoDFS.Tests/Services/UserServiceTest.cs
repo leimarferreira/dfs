@@ -1,11 +1,11 @@
-using System;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ProjetoDFS.Persistence.Contexts;
 using ProjetoDFS.Persistence.Repositories;
 using ProjetoDFS.Services;
 using ProjetoDFS.Tests.Helpers;
+using System;
+using System.Threading.Tasks;
 
 namespace ProjetoDFS.Tests.Services
 {
@@ -33,7 +33,7 @@ namespace ProjetoDFS.Tests.Services
                 _dbContext.Users.RemoveRange(users);
                 _dbContext.SaveChanges();
             }
-            catch(Exception)
+            catch (Exception)
             {
 
             }
@@ -110,13 +110,13 @@ namespace ProjetoDFS.Tests.Services
                 .Build();
 
             await _userService.SaveAsync(user);
-            
+
             var anotherUser = new UserBuilder()
                 .DefaultUser()
                 .WithEmail("anotheruser@domain.com")
                 .WithCpf("99145154015")
                 .Build();
-            
+
             var response = await _userService.SaveAsync(anotherUser);
 
             Assert.IsFalse(response.Success);
@@ -127,7 +127,7 @@ namespace ProjetoDFS.Tests.Services
         public async Task UpdateUser_ShouldSucceed()
         {
             var user = new UserBuilder().DefaultUser().Build();
-            
+
             int id = (await _userService.SaveAsync(user)).User.Id;
 
             user = new UserBuilder()
@@ -136,7 +136,7 @@ namespace ProjetoDFS.Tests.Services
                 .WithCpf("26464535072")
                 .WithPassword("updatedpassword")
                 .Build();
-            
+
             var response = await _userService.UpdateAsync(id, user);
             Assert.IsTrue(response.Success);
         }
@@ -148,7 +148,7 @@ namespace ProjetoDFS.Tests.Services
                 .DefaultUser()
                 .Build();
             int id = (await _userService.SaveAsync(user)).User.Id;
-            
+
             user = new UserBuilder().Build();
             var response = await _userService.UpdateAsync(id, user);
             Assert.IsFalse(response.Success);
@@ -171,7 +171,7 @@ namespace ProjetoDFS.Tests.Services
                 .DefaultUser()
                 .WithEmail("anotheremail@domain.com")
                 .Build();
-            
+
             var response = await _userService.UpdateAsync(id, user);
             Assert.IsFalse(response.Success);
             Assert.AreEqual("Email already in use by another user.", response.Message);
@@ -187,7 +187,7 @@ namespace ProjetoDFS.Tests.Services
                 .DefaultUser()
                 .WithEmail("invalidemail")
                 .Build();
-            
+
             var response = await _userService.UpdateAsync(id, user);
             Assert.IsFalse(response.Success);
             Assert.AreEqual("Invalid email.", response.Message);
