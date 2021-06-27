@@ -46,7 +46,7 @@ namespace core
 
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             });
 
             services.AddScoped<ICompanyRepository, CompanyRepository>();
